@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     companyName: DataTypes.STRING,
-    phone: DataTypes.TEXT
+    phone: DataTypes.STRING
   });
   return Landlord;
 };
