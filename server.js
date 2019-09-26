@@ -6,7 +6,7 @@ var exphbs = require("express-handlebars");
 // import all files in models folder
 var db = require("./models");
 
-// set up express server
+// set up an instance of express server
 var app = express();
 
 // set PORT for express
@@ -29,7 +29,8 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-// Routes
+// Routes for express server to follow 
+// & passes an arguement (app) as an instance of express server with these routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
@@ -37,12 +38,12 @@ require("./routes/htmlRoutes")(app);
 var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
-// clearing the `testdb`
+//  force : true clears the `testdb`
 if (process.env.NODE_ENV === "test") {
     syncOptions.force = true;
 }
 
-// Starting the server, syncing our models ------------------------------------/
+// Syncing models  to database & then starts the server 
 db.sequelize.sync(syncOptions).then(function() {
     app.listen(PORT, function() {
         console.log(
