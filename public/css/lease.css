@@ -1,0 +1,21 @@
+body{
+    background-image: url("../img/calipalms.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+
+
+  footer {
+    background-position: absolute;
+    width: 100%;
+   height: 60px;
+   background-color: rgb(223, 147, 212);
+   position: fixed;
+   bottom: 0;
+  }
+.img-fluid{
+  width: 1000px !important;
+  height: 400px !important;
+  margin: 0 auto !important;
+}
