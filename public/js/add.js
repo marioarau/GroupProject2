@@ -15,6 +15,7 @@ $(document).ready(function() {
     var descInput = $("#desc");
     var typeSelect = $("#type");
 
+    // add unit form eventListener with 2 arguements. HandleAddUnitForm is a function reference 
     $(addUnitForm).on("submit", handleAddUnitForm);
 
     // optional feature to capture query string from url (i.e. ?unit_id=23)
@@ -77,12 +78,14 @@ $(document).ready(function() {
     // Submits a new Unit and brings user to # page or show modal upon completion
     function submitUnit(Unit) {
 
+        console.log('posting new unit...');
+
         // ajax post method call with 3 arguements
         // route to server, obj with new unit values & function declaration
         $.post("/api/units/", Unit, function() {
 
-            // need to change where it loads or a success modal when new unit succesfully added
-            console.log('posting new unit...');
+            // need to replace these 2 lines with a success modal when new unit succesfully added
+            console.log('New Unit Added!');
             window.location.href = "/search";
         });
     }
