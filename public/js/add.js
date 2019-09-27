@@ -3,17 +3,19 @@ $(document).ready(function() {
 
     // use jQuery references to capture values from form on add.html
     var addUnitForm = $("#unit");
-    var bedrooms = $("#bedroms");
-    var baths = $("#baths");
-    var avgSqFt = $("#avgSqFt");
-    var availability = $("#availability");
-    var address = $("#address");
-    var city = $("#city");
-    var state = $("#state");
-    var zip = $("#zip");
-    var phone = $("#phone");
-    var desc = $("#desc");
-    var type = $("#type");
+    var bedroomsInput = $("#bedrooms");
+    var bathsInput = $("#baths");
+    var avgSqFtInput = $("#avgSqFt");
+    var availabilityInput = $("#availability");
+    var addressInput = $("#address");
+    var cityInput = $("#city");
+    var stateInput = $("#state");
+    var zipInput = $("#zip");
+    var phoneInput = $("#phone");
+    var descInput = $("#desc");
+    var typeSelect = $("#type");
+
+    $(addUnitForm).on("submit", handleAddUnitForm);
 
     // optional feature to capture query string from url (i.e. ?unit_id=23)
     var url = window.location.search;
@@ -27,10 +29,12 @@ $(document).ready(function() {
     // In localhost:3000/api/units/?unitId=1, postId is 1
     if (url.indexOf("?unitId=") !== -1) {
         unitId = url.split("=")[1];
-        getUnitData(unitId);
+        getUnitData(unitId, "unit");
     }
 
-    $(addUnitForm).on('click', function handleAddUnitForm() {
+    // **********FUNCTION DEFINITIONS********
+
+    function handleAddUnitForm() {
 
         // stops html from doing its default actions
         event.preventDefault();
@@ -45,17 +49,17 @@ $(document).ready(function() {
 
         // Constructing a newUnit object to pass to database
         var newUnit = {
-            bedrooms: bedrooms.val().trim(),
-            baths: baths.val().trim(),
-            avgSqFt: avgSqFt.val().trim(),
-            availability: availability.val().trim(),
-            address: address.val().trim(),
-            city: city.val().trim(),
-            state: state.val().trim(),
-            zip: zip.val().trim(),
-            phone: phone.val().trim(),
-            desc: desc.val().trim(),
-            type: type.val()
+            bedrooms: bedroomsInput.val().trim(),
+            baths: bathsInput.val().trim(),
+            avgSqFt: avgSqFtInput.val().trim(),
+            availability: availabilityInput.val().trim(),
+            address: addressInput.val().trim(),
+            city: cityInput.val().trim(),
+            state: stateInput.val().trim(),
+            zip: zipInput.val().trim(),
+            phone: phoneInput.val().trim(),
+            desc: descInput.val().trim(),
+            type: typeSelect.val()
         };
 
         console.log(newUnit);
@@ -68,9 +72,7 @@ $(document).ready(function() {
         } else {
             submitUnit(newUnit);
         }
-    });
-
-    // **********FUNCTION DEFINITIONS********
+    }
 
     // Submits a new Unit and brings user to # page or show modal upon completion
     function submitUnit(Unit) {
@@ -80,8 +82,8 @@ $(document).ready(function() {
         $.post("/api/units/", Unit, function() {
 
             // need to change where it loads or a success modal when new unit succesfully added
-            // window.location.href = "/search";
             console.log('posting new unit...');
+            window.location.href = "/search";
         });
     }
 
