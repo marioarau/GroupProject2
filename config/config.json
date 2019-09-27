@@ -1,16 +1,16 @@
 {
   "development": {
     "username": "root",
-    "password": "texcoco",
+    "password": "LOCALHOST_PW",
     "database": "socal_charm",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
-    "username": "socalcharm",
-    "password": "r05JsPSw$",
-    "database": "socalcharm",
-    "host": "db.socalcharm.com",
+    "username": "SOCAL_CHARM_DB_USERNAME",
+    "password": "SOCAL_CHARM_DB_PW",
+    "host": "SOCAL_CHARM_DB_URL",
+    "database": "SOCAL_CHARM_DB",
     "dialect": "mysql",
     "logging": true
   },
