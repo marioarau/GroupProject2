@@ -1,18 +1,18 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "exampledb",
+    "password": "texcoco",
+    "database": "socal_charm",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "testdb",
-    "host": "localhost",
+    "username": "socalcharm",
+    "password": "r05JsPSw$",
+    "database": "socalcharm",
+    "host": "db.socalcharm.com",
     "dialect": "mysql",
-    "logging": false
+    "logging": true
   },
   "production": {
     "use_env_variable": "JAWSDB_URL",
