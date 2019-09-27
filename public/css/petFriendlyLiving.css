@@ -7,8 +7,8 @@ body{
 
 
   footer {
-    background-position: absolute;
-    width: 100%;
+   background-position: absolute;
+   width: 100%;
    height: 60px;
    background-color: rgb(223, 147, 212);
    position: fixed;
