@@ -14,9 +14,12 @@ module.exports = function(app) {
         // the callback function returns & gives us access to the entire table 
         .then(function(results) {
 
-            // returns data as json 
-            res.json(results);
-        });
+                // returns data as json 
+                res.json(results);
+            })
+            .catch(function(err) {
+                res.status(500);
+            });
     });
 
     // get route that returns all posts by zip code
@@ -43,7 +46,7 @@ module.exports = function(app) {
         // create() requires an object describing the new data we're adding to table
         db.Unit.create({
 
-            landLordId: req.body.id,
+            unitId: req.body.id,
             bedrooms: req.body.bedrooms,
             baths: req.body.baths,
             avgSqFt: req.body.avgSqFt,

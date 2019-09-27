@@ -1,27 +1,66 @@
-var db = require("../models");
+// Dependencies
+// =============================================================
+var path = require("path");
+
+// HTML Routes
+// =============================================================
 
 module.exports = function(app) {
-  // Load index page
-  app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.render("index", {
-        msg: "Welcome!",
-        examples: dbExamples
-      });
-    });
-  });
 
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.render("example", {
-        example: dbExample
-      });
-    });
-  });
+    // Each of the below routes just handles the HTML page that the user gets sent to.
 
-  // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
-    res.render("404");
-  });
+    // index route loads home.html
+    app.get("/", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/home.html"));
+    });
+
+    // about route loads about.html
+    app.get("/about", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/about.html"))
+    });
+
+    // add route loads add.html
+    app.get("/add", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/add.html"));
+    });
+
+    // search route loads search.html
+    app.get("/search", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/search.html"));
+    });
+
+    // login route loads author-manager.html
+    app.get("/login", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/login.html"));
+    });
+
 };
+
+
+// code imported when Ashton created project
+// var db = require("../models");
+// module.exports = function(app) {
+//   // Load index page
+//   app.get("/search", function(req, res) {
+//     db.Unit.findAll({}).then(function(dbExamples) {
+//       res.render("search", {
+//         msg: "Welcome!",
+//         units: dbExamples
+//       });
+//     });
+//   });
+
+//   // Load example page and pass in an example by id
+//   app.get("/example/:id", function(req, res) {
+//     db.Unit.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
+//       res.render("example", {
+//         example: dbExample
+//       });
+//     });
+//   });
+
+//   // Render 404 page for any unmatched routes
+//   app.get("*", function(req, res) {
+//     res.render("404");
+//   });
+// };
