@@ -3,19 +3,41 @@ var db = require("../models");
 
 // export this function that's passing an express server instance as an arguement
 module.exports = function(app) {
-    // Get all routes for getting all units
+
+    // Get all routes for returning all units
+    // alt 2-in-1 route: app.get("/api/:units?", function(req, res) {
     app.get("/api/units", function(req, res) {
-        // app.get("/api/:units?", function(req, res) {
 
         // findAll returns all entries from a table when used without options
-        db.Unit.findAll({}).then(function(results) {
-            // the callback function returns & gives us access to the entire table 
-            // returns data as json 
-            res.json(results);
-        });
+        db.Unit.findAll({})
+
+        // the callback function returns & gives us access to the entire table 
+        .then(function(results) {
+
+                // returns data as json 
+                res.json(results);
+            })
+            .catch(function(err) {
+                res.status(500);
+            });
     });
 
-    // post route for saving a new unit
+    // get route that returns all posts by zip code
+    app.get("/api/units/zip/:zip", function(req, res) {
+        db.Units.findAll({
+                where: {
+                    zip: req.params.zip
+                }
+            })
+            .then(function(results) {
+                res.json(results);
+            })
+            .catch(function(err) {
+                res.status(500);
+            });
+    });
+
+    // post route for saving a new unit to database
     app.post("/api/units", function(req, res) {
 
         console.log('Add Unit Data:');
@@ -24,7 +46,7 @@ module.exports = function(app) {
         // create() requires an object describing the new data we're adding to table
         db.Unit.create({
 
-            landLordId: req.body.id,
+            unitId: req.body.id,
             bedrooms: req.body.bedrooms,
             baths: req.body.baths,
             avgSqFt: req.body.avgSqFt,
