@@ -1,26 +1,5 @@
 
 --
--- Table structure for table `Landlords`
---
-
-DROP TABLE IF EXISTS `Landlords`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Landlords` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(80) DEFAULT NULL,
-  `lastName` varchar(80) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `password` varchar(32) DEFAULT NULL,
-  `companyName` varchar(60) DEFAULT NULL,
-  `phone` varchar(25) DEFAULT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `Landlords`
 --
 
