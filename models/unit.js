@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     var Unit = sequelize.define("Unit", {
-        unitId: DataTypes.INTEGER,
+        landLordId: DataTypes.INTEGER,
         bedrooms: DataTypes.STRING,
         baths: DataTypes.STRING,
         avgSqFt: DataTypes.INTEGER,
