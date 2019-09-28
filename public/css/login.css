@@ -26,11 +26,12 @@ h2 {
 } */
 .form-group{
   width: 300px; 
+  position: relative; 
 }
 
 
-/*form for registration
-/* .my-form
+
+ .my-form
 {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
