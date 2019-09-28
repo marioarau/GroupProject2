@@ -4,7 +4,7 @@ var db = require("../models");
 // export this function that's passing an express server instance as an arguement
 module.exports = function(app) {
 
-    // Get all routes for returning all units
+    // Get all routes for returning all units in database
     // alt 2-in-1 route: app.get("/api/:units?", function(req, res) {
     app.get("/api/units", function(req, res) {
 
