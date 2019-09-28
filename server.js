@@ -1,7 +1,7 @@
 // dependencies
 require("dotenv").config();
 var express = require("express");
-var exphbs = require("express-handlebars");
+// var exphbs = require("express-handlebars");
 
 // import all files in models folder
 var db = require("./models");
@@ -21,13 +21,13 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Handlebars
-app.engine(
-    "handlebars",
-    exphbs({
-        defaultLayout: "main"
-    })
-);
-app.set("view engine", "handlebars");
+// app.engine(
+//     "handlebars",
+//     exphbs({
+//         defaultLayout: "main"
+//     })
+// );
+// app.set("view engine", "handlebars");
 
 // Routes for express server to follow 
 // & passes an arguement (app) as an instance of express server with these routes
