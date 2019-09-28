@@ -57,10 +57,62 @@
                   </div>
                 </div>
 
-    <main class="my-form">
-        <div class="cotainer">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
+    <!-- using bootstrap to validate management login with username and password -->
+    <div class="container">
+      <div class="row justify-content-center"> 
+        <div class="col-md-4">
+            <h2>Management Login</h2>
+             <!-- <p>Welcome to So Cal Charm where our platform brings serious renters to you, and invoices you after the renter has moved in.
+               We handle all complexity, making it a better renting experience for all parties.
+               Renters also 100% Verified.
+               </p> -->
+                    <form action="/action_page.php" class="needs-validation" novalidate>
+                      <div class="form-group">
+                        <label for="uname">Username:</label>
+                        <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Required Field.</div>
+                      </div>
+                      <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Required Field.</div>
+                      </div>
+                      <div class="form-group form-check">
+                        
+                      </div>
+                      <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                  </div>
+                  <script>
+                  // Disable form submissions if there are invalid fields
+                  (function() {
+                    'use strict';
+                    window.addEventListener('load', function() {
+                      // Get the forms we want to add validation styles to
+                      var forms = document.getElementsByClassName('needs-validation');
+                      // Loop over them and prevent submission
+                      var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                          if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                          }
+                          form.classList.add('was-validated');
+                        }, false);
+                      });
+                    }, false);
+                  })();
+                  </script>
+    
+                
+                </div>
+                <div class="col-md-2">
+                </div>
+       
+            <div class="row justify-content-right">
+                <div class="col-md-4">
                         <div class="card">
                             <div class="card-header">Register</div>
                             <div class="card-body">
@@ -122,6 +174,7 @@
                 </div>
             </div>
         </div>
+    </div>
 <footer class="footer">
     <div class="container">
       <span class="text-muted">@2019 So Cal Charm, Inc. All rights reserved.</span>
