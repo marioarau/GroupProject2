@@ -1,4 +1,4 @@
-  body{
+body{
     background-image: url("../img/calipalms.jpg");
     background-repeat: no-repeat;
     background-position: center center;
@@ -10,7 +10,7 @@
     background-position: absolute;
     width: 100%;
    height: 60px;
-    opacity: 0.8; 
+   opacity: 0.6; 
    position: fixed;
    bottom: 0;
   }
@@ -18,4 +18,28 @@
   width: 1000px !important;
   height: 400px !important;
   margin: 0 auto !important;
+}
+
+.my-form
+{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.my-form .row
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.login-form
+{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.login-form .row
+{
+    margin-left: 0;
+    margin-right: 0;
 }
