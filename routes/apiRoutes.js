@@ -5,9 +5,7 @@ var db = require("../models");
 module.exports = function(app) {
 
     // Get all routes for returning all units in database
-    // alt 2-in-1 route: app.get("/api/:units?", function(req, res) {
     app.get("/api/units", function(req, res) {
-
         // findAll returns all entries from a table when used without options
         db.Unit.findAll({})
 
@@ -15,7 +13,27 @@ module.exports = function(app) {
         .then(function(results) {
 
                 // returns data as json 
-                res.json(results);
+                return res.json(results);
+            })
+            .catch(function(err) {
+                res.status(500);
+            });
+    });
+
+    // get route to find one unit by its id
+    app.get("/api/units/:id", function(req, res) {
+
+        // console.log('=================')
+        // console.log(req.params.id)
+
+        // reference models unit.js & find 1 unit by id passed in url
+        db.Unit.findOne({
+                where: {
+                    id: req.params.id
+                }
+                // return data as json
+            }).then(function(result) {
+                return res.json(result);
             })
             .catch(function(err) {
                 res.status(500);
@@ -24,7 +42,7 @@ module.exports = function(app) {
 
     // get route that returns all posts by zip code
     app.get("/api/units/zip/:zip", function(req, res) {
-        db.Units.findAll({
+        db.Unit.findAll({
                 where: {
                     zip: req.params.zip
                 }
