@@ -3,14 +3,14 @@ module.exports = function (sequelize, DataTypes) {
   var Landlord = sequelize.define("Landlord", {
     firstName: {
       type: DataTypes.STRING(80),
-      allowNull: false,
+      allowNull: false
     },
     lastName: {
       type: DataTypes.STRING(80),
-      allowNull: false,
+      allowNull: false
     },
     email: {
-      type: Sequelize.STRING(100),
+      type: DataTypes.STRING(100),
       allowNull: false,
       validate: {
         isEmail: true
