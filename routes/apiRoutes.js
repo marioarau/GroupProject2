@@ -58,6 +58,22 @@ module.exports = function(app) {
             });
     });
 
+    // get route that returns all posts by city
+    app.get("/api/units/city/:city", function(req, res) {
+        db.Unit.findAll({
+                where: {
+                    zip: req.params.zip
+                        // city: req.params.city
+                }
+            })
+            .then(function(results) {
+                res.json(results);
+            })
+            .catch(function(err) {
+                res.status(500);
+            });
+    });
+
     // get route for bedrooms & city
     app.get("/api/units/#", function(req, res) {
         db.Unit.findAll({
@@ -72,8 +88,7 @@ module.exports = function(app) {
     // post route for saving a new unit to database
     app.post("/api/units", function(req, res) {
 
-        // console.log('Add Unit Data:');
-        // console.log(req.body);
+        console.log('Add Unit Data:', req.body);
 
         // create() requires an object describing the new data we're adding to table
         db.Unit.create({
