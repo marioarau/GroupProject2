@@ -1,18 +1,50 @@
-module.exports = function(sequelize, DataTypes) {
 
-    var Unit = sequelize.define("Unit", {
-        landLordId: DataTypes.INTEGER,
-        bedrooms: DataTypes.STRING(10),
-        baths: DataTypes.STRING(10),
-        avgSqFt: DataTypes.INTEGER,
-        availability: DataTypes.STRING(15),
-        address: DataTypes.STRING(80),
-        city: DataTypes.STRING(35),
-        state: DataTypes.STRING(2),
-        zip: DataTypes.STRING(10),
-        phone: DataTypes.STRING(25),
-        desc: DataTypes.TEXT,
-        type: DataTypes.STRING(50)
-    });
-    return Unit;
+module.exports = function (sequelize, DataTypes) {
+  var Unit = sequelize.define("Unit", {
+    landLordId: DataTypes.INTEGER,
+    rent: DataTypes.DECIMAL(10,2),
+    title: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    bedrooms: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+    },
+    baths: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+    },
+    avgSqFt: DataTypes.INTEGER,
+    availability: {
+      type: DataTypes.ENUM,
+      values: ['Available Now', 'Available Soon', 'Waiting List', 'Not Available']
+    },
+    address: {
+      type: DataTypes.STRING(80),
+      allowNull: false,
+    },
+    city:  {
+      type: DataTypes.STRING(35),
+      allowNull: false,
+    },
+    state:  {
+      type: DataTypes.STRING(2),
+      allowNull: false,
+    },
+    zip:   {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+    },
+    phone:    {
+      type: DataTypes.STRING(25),
+      allowNull: false,
+    },
+    desc: DataTypes.TEXT,
+    type: {
+      type: DataTypes.ENUM,
+      values: ['Apartment', 'House', 'Condo', 'Townhouse']
+    }
+  });
+  return Unit;
 };
