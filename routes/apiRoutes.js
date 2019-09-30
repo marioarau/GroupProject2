@@ -41,10 +41,13 @@ module.exports = function(app) {
     });
 
     // get route that returns all posts by zip code
+    // app.get("/api/units/city/:city", function(req, res) {
     app.get("/api/units/zip/:zip", function(req, res) {
+
         db.Unit.findAll({
                 where: {
                     zip: req.params.zip
+                        // city: req.params.city
                 }
             })
             .then(function(results) {
@@ -55,12 +58,12 @@ module.exports = function(app) {
             });
     });
 
-    // get route for bedrooms & zip
+    // get route for bedrooms & city
     app.get("/api/units/#", function(req, res) {
         db.Unit.findAll({
             where: {
                 bedrooms: req.params.bedrooms,
-                zip: req.params.zip
+                city: req.params.city
                     // rent: req.params.rent
             }
         });

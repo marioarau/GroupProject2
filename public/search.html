@@ -9,13 +9,11 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <title>groupProject2</title>
     <link rel="stylesheet" type="text/css" href="./styles/styles.css">
+    <title>Search</title>
 </head>
 
 <body>
-
 
     <div class="container">
         <div class="row">
@@ -53,21 +51,21 @@
         </div>
 
         <div class="row">
-            <h3>Ready to Find your Next Home?</h3>
-            <form>
-                <!-- <div class="subject">
-                    <input type="text" class="input" placeholder="Apartment Bedrooms*">
-                </div>
-                <br> -->
-                <div class="subject">
-                    <input type="text" class="input" placeholder="Zip Code *">
-                </div>
-                <br>
-                <button type="submit" class="btn btn-success" id="searchUnits">Search</button>
+            <div class="col-md-6 mx-auto my-5 px-2">
 
-                <br>
-                <div>
-            </form>
+                <h3>Ready to Find your Next Home?</h3>
+                <form id="search">
+                    <div class="form-group">
+                        <label for="city"></label>
+                        <input placeholder="City" type="text" class="form-control" id="city">
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-success" id="searchUnits">Search</button>
+
+                    <br>
+                    <div>
+                </form>
+                </div>
             </div>
 
             <div class="row" id="searchResults">
