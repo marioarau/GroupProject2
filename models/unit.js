@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         avgSqFt: DataTypes.INTEGER,
         availability: {
-            type: DataTypes.ENUM,
+            type: DataTypes.STRING(),
             values: ['Available Now', 'Available Soon', 'Waiting List', 'Not Available']
         },
         address: {
@@ -41,7 +41,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         desc: DataTypes.TEXT,
         type: {
-            type: DataTypes.ENUM,
+            type: DataTypes.STRING(10),
             values: ['Apartment', 'House', 'Condo', 'Townhouse']
         }
     });

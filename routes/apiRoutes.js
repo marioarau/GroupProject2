@@ -62,8 +62,7 @@ module.exports = function(app) {
     app.get("/api/units/city/:city", function(req, res) {
         db.Unit.findAll({
                 where: {
-                    zip: req.params.zip
-                        // city: req.params.city
+                    city: req.params.city
                 }
             })
             .then(function(results) {
@@ -79,8 +78,8 @@ module.exports = function(app) {
         db.Unit.findAll({
             where: {
                 bedrooms: req.params.bedrooms,
-                city: req.params.city
-                    // rent: req.params.rent
+                city: req.params.city,
+                rent: req.params.rent
             }
         });
     });
@@ -93,7 +92,9 @@ module.exports = function(app) {
         // create() requires an object describing the new data we're adding to table
         db.Unit.create({
 
-            unitId: req.body.id,
+            // landLordId: req.body.id,
+            title: req.body.title,
+            rent: req.body.rent,
             bedrooms: req.body.bedrooms,
             baths: req.body.baths,
             avgSqFt: req.body.avgSqFt,

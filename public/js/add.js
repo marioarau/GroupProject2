@@ -3,6 +3,8 @@ $(document).ready(function() {
 
     // use jQuery references to capture values from form on add.html
     var addUnitForm = $("#unit");
+    var titleInput = $("#title")
+    var rentInput = $('#rent');
     var bedroomsInput = $("#bedrooms");
     var bathsInput = $("#baths");
     var avgSqFtInput = $("#avgSqFt");
@@ -38,9 +40,8 @@ $(document).ready(function() {
         // stops html from doing its default actions
         event.preventDefault();
 
-        // form validation conditional
-        // if these fields are empty then don 't submit form
-        if (!bedroomsInput.val().trim() || !bathsInput.val().trim() ||
+        // form validation conditional. if these fields are empty then don 't submit form
+        if (!titleInput.val().trim() || !rentInput.val().trim() || !bedroomsInput.val().trim() || !bathsInput.val().trim() ||
             !availabilityInput.val().trim() || !cityInput.val().trim() ||
             !stateInput.val().trim() || !zipInput.val().trim()) {
             return;
@@ -48,6 +49,8 @@ $(document).ready(function() {
 
         // Constructing a newUnit object to pass to database
         var newUnit = {
+            title: titleInput.val().trim(),
+            rent: rentInput.val().trim(),
             bedrooms: bedroomsInput.val().trim(),
             baths: bathsInput.val().trim(),
             avgSqFt: avgSqFtInput.val().trim(),
@@ -80,9 +83,13 @@ $(document).ready(function() {
 
         // ajax post method call with 3 arguements
         // route to server, obj with new unit values & function declaration
-        $.post("/api/units/", Unit, function() {
+        $.post("/api/units/", Unit, function(err) {
 
+            if (err) {
+                console.log("post err", err)
+            }
             // need to replace these 2 lines with a success modal when new unit succesfully added
+            console.log('New Unit Added!')
             alert('New Unit Added!');
             window.location.href = "/add";
         });
