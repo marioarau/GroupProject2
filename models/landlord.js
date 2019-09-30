@@ -2,11 +2,11 @@ module.exports = function(sequelize, DataTypes) {
     var Landlord = sequelize.define("Landlord", {
         firstName: {
             type: DataTypes.STRING(80),
-            allowNull: false,
+            allowNull: false
         },
         lastName: {
             type: DataTypes.STRING(80),
-            allowNull: false,
+            allowNull: false
         },
         email: {
             type: DataTypes.STRING(100),
