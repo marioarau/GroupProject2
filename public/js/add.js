@@ -85,8 +85,8 @@ $(document).ready(function() {
         $.post("/api/units/", Unit, function() {
 
             // need to replace these 2 lines with a success modal when new unit succesfully added
-            console.log('New Unit Added!');
-            window.location.href = "/search";
+            alert('New Unit Added!');
+            window.location.href = "/add";
         });
     }
 
