@@ -55,11 +55,22 @@ module.exports = function(app) {
             });
     });
 
+    // get route for bedrooms & zip
+    app.get("/api/units/#", function(req, res) {
+        db.Unit.findAll({
+            where: {
+                bedrooms: req.params.bedrooms,
+                zip: req.params.zip
+                    // rent: req.params.rent
+            }
+        });
+    });
+
     // post route for saving a new unit to database
     app.post("/api/units", function(req, res) {
 
-        console.log('Add Unit Data:');
-        console.log(req.body);
+        // console.log('Add Unit Data:');
+        // console.log(req.body);
 
         // create() requires an object describing the new data we're adding to table
         db.Unit.create({
@@ -86,14 +97,17 @@ module.exports = function(app) {
         });
     });
 
-    // Route to delete an unit by id
+    // route to delete an unit by id
     app.delete("/api/units/:id", function(req, res) {
         console.log('req.params.id');
         console.log(req.params.id);
 
-        db.Unit.destroy({ where: { id: req.params.id } }).then(function(results) {
-            res.json(results);
-        });
+        db.Unit.destroy({
+                where: { id: req.params.id }
+            })
+            .then(function(results) {
+                res.json(results);
+            });
     });
 
     // route to update a unit in table
@@ -103,21 +117,13 @@ module.exports = function(app) {
         console.log(req.body);
 
         // connect to unit model & update it with these obj properties
-        db.Units.update({
-
-            //insert properties&values from req.body
-
-        }, {
-            where: {
-                id: req.body.id
-            }
-
-            // callback function passes an arguement back equal to the results from database
-        }).then(function(results) {
-
-            // formats database data as json
-            res.json(results);
+        db.Units.update(
+            req.body, {
+                where: {
+                    id: req.body.id
+                }
+            }).then(function(dbPost) {
+            res.json(dbPost);
         });
     });
-
 };
