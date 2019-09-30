@@ -14,5 +14,17 @@ module.exports = function(sequelize, DataTypes) {
         desc: DataTypes.TEXT,
         type: DataTypes.STRING(50)
     });
+
+    // uncomment after getting landlord model going
+    // Unit.associate = function(models) {
+    //     // We're saying that a Post should belong to an Author
+    //     // A Post can't be created without an Author due to the foreign key constraint
+    //     Unit.belongsTo(models.Landlord, {
+    //         foreignKey: {
+    //             allowNull: false
+    //         }
+    //     });
+    // };
+
     return Unit;
 };
