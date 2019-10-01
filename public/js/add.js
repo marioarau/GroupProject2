@@ -3,6 +3,8 @@ $(document).ready(function() {
 
     // use jQuery references to capture values from form on add.html
     var addUnitForm = $("#unit");
+    var titleInput = $("#title")
+    var rentInput = $('#rent');
     var bedroomsInput = $("#bedrooms");
     var bathsInput = $("#baths");
     var avgSqFtInput = $("#avgSqFt");
@@ -21,8 +23,6 @@ $(document).ready(function() {
     // optional feature to capture query string from url (i.e. ?unit_id=23)
     var url = window.location.search;
     var unitId;
-
-    // set flag for if we're updating a unit or not
     var updating = false;
 
     // use when wanting to edit a post
@@ -40,16 +40,17 @@ $(document).ready(function() {
         // stops html from doing its default actions
         event.preventDefault();
 
-        // form validation conditional
-        // if these fields are empty then don't submit form
-        // if (!bedrooms.val().trim() || !baths.val().trim() ||
-        //     !availability.val().trim() || !city.val().trim() ||
-        //     !state.val().trim() || !zip.val().trim()) {
-        //     return;
-        // }
+        // form validation conditional. if these fields are empty then don 't submit form
+        if (!titleInput.val().trim() || !rentInput.val().trim() || !bedroomsInput.val().trim() || !bathsInput.val().trim() ||
+            !availabilityInput.val().trim() || !cityInput.val().trim() ||
+            !stateInput.val().trim() || !zipInput.val().trim()) {
+            return;
+        }
 
         // Constructing a newUnit object to pass to database
         var newUnit = {
+            title: titleInput.val().trim(),
+            rent: rentInput.val().trim(),
             bedrooms: bedroomsInput.val().trim(),
             baths: bathsInput.val().trim(),
             avgSqFt: avgSqFtInput.val().trim(),
@@ -82,54 +83,15 @@ $(document).ready(function() {
 
         // ajax post method call with 3 arguements
         // route to server, obj with new unit values & function declaration
-        $.post("/api/units/", Unit, function() {
+        $.post("/api/units/", Unit, function(err) {
 
-            // need to replace these 2 lines with a success modal when new unit succesfully added
-            console.log('New Unit Added!');
-            window.location.href = "/search";
-        });
-    }
-
-    // Gets post data for a post if we're editing
-    function getUnitData(id) {
-        $.get("/api/posts/" + id, function(data) {
-            if (data) {
-                // If this post exists, prefill our cms forms with its data
-                // titleInput.val(data.title);
-                // bodyInput.val(data.body);
-                // postCategorySelect.val(data.category);
-                // If we have a post with this id, set a flag for us to know to update the post
-                // when we hit submit
-                updating = true;
+            if (err) {
+                console.log("post err", err)
             }
+            // need to replace these 2 lines with a success modal when new unit succesfully added
+            console.log('New Unit Added!')
+            alert('New Unit Added!');
+            window.location.href = "/add";
         });
-    }
-
-    // Update a given unit, bring user to the # page when done
-    function updateUnit(unit) {
-        $.ajax({
-                method: "PUT",
-                url: "/api/units",
-                data: unit
-            })
-            .then(function() {
-
-                // need to change where it loads or a success modal when unit succesfully updated
-                window.location.href = "/search";
-            });
     }
 });
-
-// var newUnit = {
-//     bedrooms: '1',
-//     baths: '1',
-//     avgSqFt: '490',
-//     availability: '10/01/2019',
-//     address: '24 street',
-//     city: 'los angeles',
-//     state: 'ca',
-//     zip: '90024',
-//     phone: '323-500-7777',
-//     desc: 'cute 1 bedroom',
-//     type: 'apartment'
-// };
