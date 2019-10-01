@@ -115,7 +115,6 @@ footer {
  bottom: 0;
 }
 .img-fluid{
-<<<<<<< HEAD
   width: 1000px !important;
   height: 400px !important;
   margin: 0 auto !important;
@@ -126,9 +125,3 @@ footer {
   padding-bottom: 50px;
 }
 
-=======
-width: 1000px !important;
-height: 400px !important;
-margin: 0 auto !important;
-}
->>>>>>> 927f7491b55fc1dea42e168f0b03e269ac848c6c
