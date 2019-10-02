@@ -11,7 +11,7 @@ module.exports = function(app) {
 
     // index route loads home.html
     app.get("/", function(req, res) {
-        res.sendFile(path.join(__dirname, "../public/home.html"));
+        res.sendFile(path.join(__dirname, "../public/search.html"));
     });
 
     // about route loads about.html
@@ -24,9 +24,9 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "../public/add.html"));
     });
 
-    // search route loads search.html
-    app.get("/search", function(req, res) {
-        res.sendFile(path.join(__dirname, "../public/search.html"));
+    // rentals route loads search.html
+    app.get("/rentals", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/rentals.html"));
     });
 
     // login route loads author-manager.html
