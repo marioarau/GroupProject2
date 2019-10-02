@@ -2,7 +2,7 @@
 $(document).ready(function() {
 
     // use jQuery references to capture values from form on add.html
-    var addUnitForm = $("#unit");
+    var addUnitForm = $("#unitForm");
     var titleInput = $("#title")
     var rentInput = $('#rent');
     var bedroomsInput = $("#bedrooms");
@@ -28,10 +28,10 @@ $(document).ready(function() {
     // use when wanting to edit a post
     // If we have this section in our url, we pull out the unit id from the url
     // In localhost:3000/api/units/?unitId=1, postId is 1
-    if (url.indexOf("?unitId=") !== -1) {
-        unitId = url.split("=")[1];
-        getUnitData(unitId, "unit");
-    }
+    // if (url.indexOf("?unitId=") !== -1) {
+    //     unitId = url.split("=")[1];
+    //     getUnitData(unitId, "unit");
+    // }
 
     // **********FUNCTION DEFINITIONS********
 
