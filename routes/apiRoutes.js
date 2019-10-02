@@ -84,6 +84,7 @@ module.exports = function(app) {
     // get route for bedrooms, rent (min & max) & city
     // POSTMAN localhost:3000/api/fs/bedrooms/1/city/Los Angeles/rentlow/900/renthigh/1200
     app.get("/api/fs/bedrooms/:bedrooms/city/:city/rentlow/:rent1/renthigh/:rent2", function(req, res) {
+        console.log(req.params);
         console.log("bedrooms: ", req.params.bedrooms);
         console.log("city: ", req.params.city);
         console.log("rentlow: ", req.params.rent1);

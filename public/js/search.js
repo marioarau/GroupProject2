@@ -1,46 +1,62 @@
 $(document).ready(function() {
 
-    var searchFormDiv = $('#searchForm');
+    var searchForm = $('#searchForm');
     var resultsDiv = $('#searchResults');
     var cityInput = $('#city');
-    var searchCity = "";
+    var bedsInput = $('#bedrooms');
+    var rentLow = $('#rent1');
+    var rentMax = $('#rent2');
+    var searchCity;
 
     // eventListener for search form
-    searchFormDiv.on('submit', handleSearchForm);
+    searchForm.on('submit', handleSearchForm);
 
     function handleSearchForm() {
 
         // stops html from doing its default actions
         event.preventDefault();
 
-        searchCity = cityInput.val().trim();
-        console.log(searchCity);
+        // search with 1 param - city
+        // searchCity = cityInput.val().trim();
+        // console.log(searchCity);
+        // getCity(searchCity);
 
-        // var searchObj = {
-        //     rent: $('#rent').val().trim(),
-        //     bedrooms: $('#bedrooms').val().trim(),
-        //     city: searchCity
-        // };
-        // all(searchObj);
+        var searchObj = {
 
-        getUnits(searchCity);
+            bedrooms: bedsInput.val(),
+            rent1: rentLow.val(),
+            rent2: rentMax.val(),
+            city: cityInput.val().trim(),
+        };
+
+        console.log(searchObj);
+        getAll(searchObj);
+
     }
 
-    function all(obj) {
-        $.get("/api/units/" + obj, function(data) {
+    // function ajax get method for bedrooms, city & rent
+    function getAll(obj) {
+
+        console.log('getAll obj', obj);
+
+        $.get('/api/fs/' + obj, function cb(err, data) {
+
+            if (err) {
+                console.log(err);
+            };
             console.log(data);
+
+            renderUnits(data);
         });
     }
 
-    function getUnits(searchObj) {
-
+    function getCity(searchObj) {
 
         console.log(searchObj);
-        // console.log(searchObj.city);
 
         // ajax get call for a city or all units in database
         // $.get("/api/unit/", searchObj, function(err, data) {
-        $.get("/api/units/city/" + searchObj, function(data) {
+        $.get('/api/units/city/' + searchObj, function(data) {
 
             // if (err) {
             //     console.log(err);
