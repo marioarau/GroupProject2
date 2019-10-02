@@ -44,10 +44,11 @@ module.exports = function(app) {
     // app.get("/api/units/city/:city", function(req, res) {
     app.get("/api/units/zip/:zip", function(req, res) {
 
+        console.log(req);
+
         db.Unit.findAll({
                 where: {
                     zip: req.params.zip
-                        // city: req.params.city
                 }
             })
             .then(function(results) {
@@ -60,12 +61,17 @@ module.exports = function(app) {
 
     // get route that returns all posts by city
     app.get("/api/units/city/:city", function(req, res) {
+        console.log('apiRoute city data:')
+        console.log(req.params)
+        console.log(req.params.city)
+
         db.Unit.findAll({
                 where: {
                     city: req.params.city
                 }
             })
             .then(function(results) {
+                console.log(results)
                 res.json(results);
             })
             .catch(function(err) {
@@ -74,7 +80,8 @@ module.exports = function(app) {
     });
 
     // get route for bedrooms & city
-    app.get("/api/units/#", function(req, res) {
+    app.get("/api/units/search/:search", function(req, res) {
+        console.log(req.params)
         db.Unit.findAll({
             where: {
                 bedrooms: req.params.bedrooms,
