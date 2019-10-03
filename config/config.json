@@ -1,7 +1,7 @@
 {
     "development": {
         "username": "root",
-        "password": "texcoco",
+        "password": "",
         "database": "socalcharm",
         "host": "localhost",
         "dialect": "mysql"
