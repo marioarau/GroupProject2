@@ -154,16 +154,9 @@ footer {
   padding-bottom: 50px;
 }
 
-#submission-form {
-  /* display: block; */
-  margin-left: 20px;
-  height: 100px;
-  width: 30%;
-  padding: .375rem .75rem;
-  border: 1px solid #ced4da;
-  border-radius: .25rem;
-}
 
 #unitForm {
-  padding:20px 40px; 
+  padding:20px 50px; 
+  height: "48";
 }
+
