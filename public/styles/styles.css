@@ -11,9 +11,15 @@ width: 100%;
 }
 .navbar {
 padding: 0px !important; 
+
+}
+
+.logo{
+  margin-left: 400px ; 
 }
 .navbar-nav {
-margin-left: 200px; 
+margin-left: 20px; 
+margin-right: 250px ; 
 }
 .a1 {
 color: #A9A9A9; 
