@@ -10,16 +10,12 @@ $(document).ready(function() {
 
     // eventListener for search form
     searchForm.on('submit', handleSearchForm);
+    searchForm.on('submit', clearSearchInputs);
 
     function handleSearchForm() {
 
         // stops html from doing its default actions
         event.preventDefault();
-
-        // search with 1 param - city
-        // searchCity = cityInput.val().trim();
-        // console.log(searchCity);
-        // getCity(searchCity);
 
         var searchObj = {
 
@@ -43,11 +39,11 @@ $(document).ready(function() {
         var queryStr = obj.bedrooms + '/city/' + obj.city + '/rentlow/' + obj.rent1 + '/renthigh/' + obj.rent2;
         console.log(queryStr);
 
-        $.get('/api/fs/bedrooms/' + queryStr, function cb(err, data) {
+        $.get('/api/fs/bedrooms/' + queryStr, function(data) {
 
-            if (err) {
-                console.log(err);
-            };
+            // if (err) {
+            //     console.log(err);
+            // };
 
             console.log(data);
 
@@ -55,8 +51,7 @@ $(document).ready(function() {
                 displayEmpty();
             } else {
                 // call function & pass data
-                // renderRow(data);
-                renderUnits(data);
+                renderRow(data);
             };
         });
     }
@@ -64,7 +59,7 @@ $(document).ready(function() {
     // 
     function renderRow(data) {
 
-        console.log('hit renderRow')
+        // console.log('hit renderRow')
         resultsDiv.empty();
 
         // For each unit that our server sends back
@@ -72,39 +67,59 @@ $(document).ready(function() {
             // Create a parent div to hold book data
             var newDiv = $("<div>");
             // Add a class to this div: 'results'
-            newDiv.addClass("results");
+            newDiv.addClass("card results");
             // Add an id to the results to mark which results it is
             newDiv.attr("id", "unitResults-" + i);
+            newDiv.attr("style", "width: 18rem;");
+            // newDiv.attr("img", "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80").attr("class", "card-img-top");
+
+            var newDiv2 = $("<div>").addClass("card-body");
+            var img = $('<img>').attr("class", "card-img-top");
+            var h5 = $('<h5>').addClass("card-title").attr("id", "title" + i);
+            var p = $("<p>").addClass("card-text").attr("id", "text" + i);
+            var p2 = $("<p>").addClass("card-text2").attr("id", "text" + i);
+            var button = $('<button>');
+            button.addClass("btn btn-primary btn-rental");
+
+            newDiv2.append(h5);
+            newDiv2.append(p);
+            newDiv2.append(p2);
+            newDiv2.append(button);
             // Append the results to the searchResults div
+            newDiv.append(img);
+            newDiv.append(newDiv2);
             resultsDiv.append(newDiv);
 
-            renderUnits(data);
+            img.attr("src", "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80");
+            $("#title" + i).text(data[i].title);
+            $(".card-text").text("Bedroom(s): " + data[i].bedrooms);
+            $(".card-text2").text("Rent: " + data[i].rent);
+            $(".btn-rental").text(data[i].availability);
+
+            // renderUnits(i, data);
         };
     }
+
+    function clearSearchInputs() {
+        bedsInput.empty();
+        rentLow.empty();
+        rentMax.empty();
+        cityInput.val("");
+    }
+
     // function accepts an arguement & writes the results to search.html
-    function renderUnits(data) {
-        console.log('renderUnits data:', data);
+    function renderUnits(i, data) {
+        // console.log('renderUnits data:', data);
 
-        resultsDiv.empty();
+        // add our unit data to the results we just placed on the page
+        $("#title" + i).text(data[i].title);
+        $(".card-text").append("<p>Bedroom(s): " + data[i].bedrooms + "</p>");
+        $(".card-text").append("<p>Rent: " + data[i].rent + "</p>");
+        $(".btn-rental").text(data[i].availability);
 
-        // For each unit that our server sends back
-        for (var i = 0; i < data.length; i++) {
-            // Create a parent div to hold book data
-            var newDiv = $("<div>");
-            // Add a class to this div: 'results'
-            newDiv.addClass("results");
-            // Add an id to the results to mark which results it is
-            newDiv.attr("id", "unitResults-" + i);
-            // Append the results to the searchResults div
-            resultsDiv.append(newDiv);
-
-            // add our unit data to the results we just placed on the page
-            $("#unitResults-" + i).append("<h2>" + (i + 1) + ". " + data[i].title + "</h2>");
-            $("#unitResults-" + i).append("<h3>Bedroom(s): " + data[i].bedrooms + "</h4>");
-            $("#unitResults-" + i).append("<h3>Rent: " + data[i].rent + "</h4>");
-            $("#unitResults-" + i).append("<h3>Available: " + data[i].availability + "</h4>");
-        };
+        // searchForm.empty();
     }
+
     // function to findAll by city
     function getCity(searchObj) {
 
