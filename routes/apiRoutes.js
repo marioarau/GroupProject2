@@ -8,7 +8,7 @@ const Op = db.Sequelize.Op;
 module.exports = function(app) {
 
     // Get all routes for returning all units in database
-    app.get("/api/units", function(req, res) {
+    app.get('/api/units', function(req, res) {
         // findAll returns all entries from a table when used without options
         db.Unit.findAll({})
 
@@ -24,7 +24,7 @@ module.exports = function(app) {
     });
 
     // get route to find one unit by its id
-    app.get("/api/units/:id", function(req, res) {
+    app.get('/api/units/:id', function(req, res) {
 
         // console.log('=================')
         // console.log(req.params.id)
@@ -44,7 +44,7 @@ module.exports = function(app) {
     });
 
     // get route that returns all posts by zip code
-    app.get("/api/units/zip/:zip", function(req, res) {
+    app.get('/api/units/zip/:zip', function(req, res) {
 
         console.log(req);
 
@@ -62,7 +62,7 @@ module.exports = function(app) {
     });
 
     // get route that returns all posts by city
-    app.get("/api/units/city/:city", function(req, res) {
+    app.get('/api/units/city/:city', function(req, res) {
         console.log('apiRoute city data:')
         console.log(req.params)
         console.log(req.params.city)
@@ -83,7 +83,8 @@ module.exports = function(app) {
 
     // get route for bedrooms, rent (min & max) & city
     // POSTMAN localhost:3000/api/fs/bedrooms/1/city/Los Angeles/rentlow/900/renthigh/1200
-    app.get("/api/fs/bedrooms/:bedrooms/city/:city/rentlow/:rent1/renthigh/:rent2", function(req, res) {
+    app.get('/api/fs/bedrooms/:bedrooms/city/:city/rentlow/:rent1/renthigh/:rent2', function(req, res) {
+
         console.log(req.params);
         console.log("bedrooms: ", req.params.bedrooms);
         console.log("city: ", req.params.city);
