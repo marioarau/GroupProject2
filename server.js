@@ -1,6 +1,9 @@
 // dependencies
 require("dotenv").config();
 var express = require("express");
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+
 // var exphbs = require("express-handlebars");
 
 // import all files in models folder
@@ -8,6 +11,9 @@ var db = require("./models");
 
 // set up an instance of express server
 var app = express();
+
+app.use(cookieParser());
+app.use(session({secret: "socalcharm"}));
 
 // set PORT for express
 // Heroku needs process.env.PORT
