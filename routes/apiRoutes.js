@@ -1,11 +1,14 @@
 // import entire models folder
 var db = require("../models");
 
+// Necessary for rent min & max
+const Op = db.Sequelize.Op;
+
 // export this function that's passing an express server instance as an arguement
 module.exports = function(app) {
 
     // Get all routes for returning all units in database
-    app.get("/api/units", function(req, res) {
+    app.get('/api/units', function(req, res) {
         // findAll returns all entries from a table when used without options
         db.Unit.findAll({})
 
@@ -21,7 +24,7 @@ module.exports = function(app) {
     });
 
     // get route to find one unit by its id
-    app.get("/api/units/:id", function(req, res) {
+    app.get('/api/units/:id', function(req, res) {
 
         // console.log('=================')
         // console.log(req.params.id)
@@ -41,8 +44,7 @@ module.exports = function(app) {
     });
 
     // get route that returns all posts by zip code
-    // app.get("/api/units/city/:city", function(req, res) {
-    app.get("/api/units/zip/:zip", function(req, res) {
+    app.get('/api/units/zip/:zip', function(req, res) {
 
         console.log(req);
 
@@ -60,7 +62,7 @@ module.exports = function(app) {
     });
 
     // get route that returns all posts by city
-    app.get("/api/units/city/:city", function(req, res) {
+    app.get('/api/units/city/:city', function(req, res) {
         console.log('apiRoute city data:')
         console.log(req.params)
         console.log(req.params.city)
@@ -79,16 +81,30 @@ module.exports = function(app) {
             });
     });
 
-    // get route for bedrooms & city
-    app.get("/api/units/search/:search", function(req, res) {
-        console.log(req.params)
+    // get route for bedrooms, rent (min & max) & city
+    // POSTMAN localhost:3000/api/fs/bedrooms/1/city/Los Angeles/rentlow/900/renthigh/1200
+    app.get('/api/fs/bedrooms/:bedrooms/city/:city/rentlow/:rent1/renthigh/:rent2', function(req, res) {
+
+        console.log(req.params);
+        console.log("bedrooms: ", req.params.bedrooms);
+        console.log("city: ", req.params.city);
+        console.log("rentlow: ", req.params.rent1);
+        console.log("renthigh: ", req.params.rent2);
         db.Unit.findAll({
-            where: {
-                bedrooms: req.params.bedrooms,
-                city: req.params.city,
-                rent: req.params.rent
-            }
-        });
+                where: {
+                    bedrooms: req.params.bedrooms,
+                    city: req.params.city,
+                    rent: {
+                        [Op.between]: [req.params.rent1, req.params.rent2]
+                    }
+                }
+            })
+            .then(function(results) {
+                res.json(results);
+            })
+            .catch(function(err) {
+                res.status(500);
+            });
     });
 
     // post route for saving a new unit to database
