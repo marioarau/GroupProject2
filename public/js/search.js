@@ -50,10 +50,12 @@ $(document).ready(function() {
             };
 
             console.log(data);
+
             if (!data || !data.length) {
                 displayEmpty();
             } else {
                 // call function & pass data
+                // renderRow(data);
                 renderUnits(data);
             };
         });
