@@ -1,52 +1,53 @@
 $(document).ready(function() {
 
-    var searchFormDiv = $('#searchForm');
+    var searchForm = $('#searchForm');
     var resultsDiv = $('#searchResults');
     var cityInput = $('#city');
-    var searchCity = "";
+    var bedsInput = $('#bedrooms');
+    var rentLow = $('#rent1');
+    var rentMax = $('#rent2');
+    var searchCity;
 
     // eventListener for search form
-    searchFormDiv.on('submit', handleSearchForm);
+    searchForm.on('submit', handleSearchForm);
 
     function handleSearchForm() {
 
         // stops html from doing its default actions
         event.preventDefault();
 
-        searchCity = cityInput.val().trim();
-        console.log(searchCity);
+        // search with 1 param - city
+        // searchCity = cityInput.val().trim();
+        // console.log(searchCity);
+        // getCity(searchCity);
 
-        // var searchObj = {
-        //     rent: $('#rent').val().trim(),
-        //     bedrooms: $('#bedrooms').val().trim(),
-        //     city: searchCity
-        // };
-        // all(searchObj);
+        var searchObj = {
 
-        getUnits(searchCity);
-    }
-
-    function all(obj) {
-        $.get("/api/units/" + obj, function(data) {
-            console.log(data);
-        });
-    }
-
-    function getUnits(searchObj) {
-
+            bedrooms: bedsInput.val(),
+            rent1: rentLow.val(),
+            rent2: rentMax.val(),
+            city: cityInput.val().trim(),
+        };
 
         console.log(searchObj);
-        // console.log(searchObj.city);
+        getAll(searchObj);
 
-        // ajax get call for a city or all units in database
-        // $.get("/api/unit/", searchObj, function(err, data) {
-        $.get("/api/units/city/" + searchObj, function(data) {
+    }
 
-            // if (err) {
-            //     console.log(err);
-            //     res.status(500);
-            // }
-            // if (err) throw err;
+    // function ajax get method for bedrooms, city & rent
+    function getAll(obj) {
+
+        console.log('getAll obj', obj);
+
+        // /api/fs/bedrooms/:bedrooms/city/:city/rentlow/:rent1/renthigh/:rent2
+        var queryStr = obj.bedrooms + '/city/' + obj.city + '/rentlow/' + obj.rent1 + '/renthigh/' + obj.rent2;
+        console.log(queryStr);
+
+        $.get('/api/fs/bedrooms/' + queryStr, function cb(err, data) {
+
+            if (err) {
+                console.log(err);
+            };
 
             console.log(data);
 
@@ -54,18 +55,39 @@ $(document).ready(function() {
                 displayEmpty();
             } else {
                 // call function & pass data
+                // renderRow(data);
                 renderUnits(data);
-            }
+            };
         });
     }
 
+    // 
+    function renderRow(data) {
+
+        console.log('hit renderRow')
+        resultsDiv.empty();
+
+        // For each unit that our server sends back
+        for (var i = 0; i < data.length; i++) {
+            // Create a parent div to hold book data
+            var newDiv = $("<div>");
+            // Add a class to this div: 'results'
+            newDiv.addClass("results");
+            // Add an id to the results to mark which results it is
+            newDiv.attr("id", "unitResults-" + i);
+            // Append the results to the searchResults div
+            resultsDiv.append(newDiv);
+
+            renderUnits(data);
+        };
+    }
     // function accepts an arguement & writes the results to search.html
     function renderUnits(data) {
         console.log('renderUnits data:', data);
 
         resultsDiv.empty();
 
-        // For each book that our server sends us back
+        // For each unit that our server sends back
         for (var i = 0; i < data.length; i++) {
             // Create a parent div to hold book data
             var newDiv = $("<div>");
@@ -83,6 +105,54 @@ $(document).ready(function() {
             $("#unitResults-" + i).append("<h3>Available: " + data[i].availability + "</h4>");
         };
     }
+    // function to findAll by city
+    function getCity(searchObj) {
+
+        console.log(searchObj);
+
+        // ajax get call for a city or all units in database
+        $.get('/api/units/city/' + searchObj, function(data) {
+
+            // if (err) {
+            //     console.log(err);
+            //     res.status(500);
+            // }
+
+            console.log(data);
+
+            if (!data || !data.length) {
+                displayEmpty();
+            } else {
+                // call function & pass data
+                render(data);
+            }
+        });
+    }
+    // function accepts an arguement & writes the results to search.html
+    function render(data) {
+        console.log('renderUnits data:', data);
+
+        resultsDiv.empty();
+
+        // For each unit that our server sends back
+        for (var i = 0; i < data.length; i++) {
+            // Create a parent div to hold book data
+            var newDiv = $("<div>");
+            // Add a class to this div: 'results'
+            newDiv.addClass("results");
+            // Add an id to the results to mark which results it is
+            newDiv.attr("id", "unitResults-" + i);
+            // Append the results to the searchResults div
+            resultsDiv.append(newDiv);
+
+            // add our unit data to the results we just placed on the page
+            $("#unitResults-" + i).append("<h2>" + (i + 1) + ". " + data[i].title + "</h2>");
+            $("#unitResults-" + i).append("<h3>Bedroom(s): " + data[i].bedrooms + "</h4>");
+            $("#unitResults-" + i).append("<h3>Rent: " + data[i].rent + "</h4>");
+            $("#unitResults-" + i).append("<h3>Available: " + data[i].availability + "</h4>");
+        };
+    }
+
     // This function displays a message when there are no posts
     function displayEmpty() {
 
@@ -92,7 +162,6 @@ $(document).ready(function() {
         messageH2.html("No Matches Found");
         resultsDiv.append(messageH2);
     }
-
 
 
 });

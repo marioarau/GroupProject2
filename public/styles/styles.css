@@ -95,13 +95,13 @@ height: 500px;
   height: 800px !important; 
 }
 .rental-row {
-  height: 200px !important; 
+  /* height: 200px !important;  */
   margin-left: 85px ; 
   padding: 5px ; 
 }
-.card-body {
-  height: 150px !important; 
-  
+.card {
+  padding: 10px ; 
+  position: relative;
 }
 .card-title {
   font-size: 16px ; 
@@ -109,12 +109,14 @@ height: 500px;
   margin-top: 0 !important; 
 }
 .card-text {
-  height: 120px !important;
+  /* height: 120px !important; */
 
   font-size: 11px ; 
 }
 .btn-rental {
-  position: relative; 
+  position: absolute; 
+  bottom: 10px; 
+  left: 10px ; 
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
