@@ -11,9 +11,15 @@ width: 100%;
 }
 .navbar {
 padding: 0px !important; 
+
+}
+
+.logo{
+  margin-left: 400px ; 
 }
 .navbar-nav {
-margin-left: 200px; 
+margin-left: 20px; 
+margin-right: 250px ; 
 }
 .a1 {
 color: #A9A9A9; 
@@ -93,15 +99,17 @@ height: 500px;
 /* rental page */
 .rental-container {
   height: 800px !important; 
+  
 }
 .rental-row {
   /* height: 200px !important;  */
   margin-left: 85px ; 
-  padding: 5px ; 
+  padding: 10px ; 
 }
 .card {
   padding: 10px ; 
   position: relative;
+  margin: 10px auto ; 
 }
 .card-title {
   font-size: 16px ; 
@@ -117,6 +125,13 @@ height: 500px;
   position: absolute; 
   bottom: 10px; 
   left: 10px ; 
+}
+.unit-row {
+  position: relative; 
+  
+}
+.unit-card {
+  position: absolute; 
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
@@ -148,11 +163,11 @@ footer {
   height: 400px !important;
   margin: 0 auto !important;
 }
-.card{
+/* .card{
   margin-right:50px;
   margin-top: 50px;
   padding-bottom: 50px;
-}
+} */
 
 
 #unitForm {
