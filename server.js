@@ -2,7 +2,6 @@
 require("dotenv").config();
 var express = require("express");
 var cookieParser = require('cookie-parser');
-var session = require('express-session');
 const multer = require('multer');
 const upload = multer({
   dest: '/public/uploads/' // this saves your file into a directory called "uploads"
@@ -15,9 +14,6 @@ var db = require("./models");
 
 // set up an instance of express server
 var app = express();
-
-app.use(cookieParser());
-app.use(session({ secret: "@socalcharm@", cookie: { maxAge: 60000 }}));
 
 // set PORT for express
 // Heroku needs process.env.PORT

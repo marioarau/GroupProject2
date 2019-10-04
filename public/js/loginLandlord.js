@@ -50,8 +50,12 @@ $(document).ready(function() {
                 console.log("post err", err)
             }
             // need to replace these 2 lines with a success modal when new unit succesfully added
+            console.log("login info: "+JSON.stringify(login));
+            console.log("login.email: "+JSON.stringify(login.email));
+            sessionStorage.setItem('loggedIn', login.email);
+            //$.session.set("loggedIn", login.email);
             console.log('Logged in successfully')
-            //window.location.href = "/";
+            window.location.href = "/add.html";
         });
     }
 });
