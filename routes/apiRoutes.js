@@ -86,7 +86,6 @@ module.exports = function (app) {
     app.get('/api/fs/bedrooms/:bedrooms/city/:city/rentlow/:rent1/renthigh/:rent2', function (req, res) {
 
         console.log(req.params);
-        console.log(req.session);
         console.log("bedrooms: ", req.params.bedrooms);
         console.log("city: ", req.params.city);
         console.log("rentlow: ", req.params.rent1);
@@ -173,25 +172,23 @@ module.exports = function (app) {
     app.post('/api/login', function (req, res) {
 
         console.log('entering login...');
-        console.log("req.body: "+JSON.stringify(req.body));
+        console.log("req.body: " + JSON.stringify(req.body));
 
         db.Tenant.findOne({
             where: {
                 email: req.body.email
             }
         }).then(function (user) {
-            console.log("user: "+JSON.stringify(user));
+            console.log("user: " + JSON.stringify(user));
             if (!user) {
                 res.render('login.jade', { error: 'Invalid email or password.' });
             }
             else {
-                console.log("req.body.password: "+req.body.password);
-                console.log("user.password: "+user.password);
+                console.log("req.body.password: " + req.body.password);
+                console.log("user.password: " + user.password);
 
                 if (req.body.password === user.password) {
                     // sets a cookie with the user's info
-                    req.session.user = req.body.email;
-                    console.log("req.session: "+JSON.stringify(req.session));
                     //res.redirect('/dashboard');
                     res.redirect('/');
                 }
@@ -209,27 +206,24 @@ module.exports = function (app) {
     app.post('/api/landlord/login', function (req, res) {
 
         console.log('entering login...');
-        console.log("req.body: "+JSON.stringify(req.body));
+        console.log("req.body: " + JSON.stringify(req.body));
 
         db.Landlord.findOne({
             where: {
                 email: req.body.email
             }
         }).then(function (user) {
-            console.log("user: "+JSON.stringify(user));
+            console.log("user: " + JSON.stringify(user));
             if (!user) {
                 res.render('login.jade', { error: 'Invalid email or password.' });
             }
             else {
-                console.log("req.body.password: "+req.body.password);
-                console.log("user.password: "+user.password);
+                console.log("req.body.password: " + req.body.password);
+                console.log("user.password: " + user.password);
 
                 if (req.body.password === user.password) {
                     // sets a cookie with the user's info
-                    req.session.landlord = req.body.email;
-                    console.log("req.session: "+JSON.stringify(req.session));
-                    //res.redirect('/dashboard');
-                    res.redirect('/');
+                    return res.json(user);
                 }
                 else {
                     // error page
@@ -241,5 +235,5 @@ module.exports = function (app) {
             res.status(500);
         });
     });
-    
+
 }
