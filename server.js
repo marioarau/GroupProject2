@@ -2,12 +2,6 @@
 require("dotenv").config();
 var express = require("express");
 var cookieParser = require('cookie-parser');
-const multer = require('multer');
-const upload = multer({
-  dest: '/public/uploads/' // this saves your file into a directory called "uploads"
-}); 
-
-// var exphbs = require("express-handlebars");
 
 // import all files in models folder
 var db = require("./models");
