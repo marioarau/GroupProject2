@@ -8,7 +8,9 @@ $(document).ready(function () {
         window.location.href = "/login.html";
     }
     // use jQuery references to capture values from form on add.html
+
     var addUnitForm = $("#unitForm");
+
     var titleInput = $("#title")
     var rentInput = $('#rent');
     var bedroomsInput = $("#bedrooms");
@@ -53,8 +55,12 @@ $(document).ready(function () {
             return;
         }
 
+        landlordId = sessionStorage.getItem("landlordId");
+        console.log("landlordId: ",landlordId);
+
         // Constructing a newUnit object to pass to database
         var newUnit = {
+            landlordId: landlordId,
             title: titleInput.val().trim(),
             rent: rentInput.val().trim(),
             bedrooms: bedroomsInput.val().trim(),
@@ -97,7 +103,7 @@ $(document).ready(function () {
             // need to replace these 2 lines with a success modal when new unit succesfully added
             console.log('New Unit Added!')
             alert('New Unit Added!');
-            window.location.href = "/add";
+            //window.location.href = "/add";
         });
     }
 });

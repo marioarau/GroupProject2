@@ -43,18 +43,19 @@ $(document).ready(function() {
         // ajax post method call with 3 arguements
         // route to server, obj with new unit values & function declaration
 
-        $.post('/api/landlord/login/', login, function (err) {
+        $.post('/api/landlord/login/', login, function (res) {
 
             console.log('after posting landlord login ...');
-            if (err) {
-                console.log("post err", err)
+            if (res) {
+                console.log("post err", res)
             }
             // need to replace these 2 lines with a success modal when new unit succesfully added
             console.log("login info: "+JSON.stringify(login));
             console.log("login.email: "+JSON.stringify(login.email));
+            console.log("res: ", res);
             sessionStorage.setItem('loggedIn', login.email);
-            //$.session.set("loggedIn", login.email);
-            console.log('Logged in successfully')
+            sessionStorage.setItem('landlordId', res.id);
+            console.log('Logged in successfully');
             window.location.href = "/add.html";
         });
     }

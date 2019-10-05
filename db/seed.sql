@@ -1,5 +1,6 @@
 
 
+use socalcharm;
 
 LOCK TABLES `Landlords` WRITE;
 /*!40000 ALTER TABLE `Landlords` DISABLE KEYS */;
@@ -39,3 +40,4 @@ INSERT INTO `Units` (`id`, `landLordId`, `rent`, `title`, `bedrooms`, `baths`, `
 INSERT INTO `Units` (`id`, `landLordId`, `rent`, `title`, `bedrooms`, `baths`, `avgSqFt`, `availability`, `address`, `city`, `state`, `zip`, `phone`, `desc`, `type`, `createdAt`, `updatedAt`) VALUES (6,5,1200.00,'Cozy Apartment','3','2',2925,'Available Now','6245 wilshire blvd','Los Angeles','CA','90048','844-232-6118','Embrace an unrivaled views and exquisite design at Vision on Wilshire. These luxury LA apartments feature gourmet kitchens complete with quartz countertops, premium Bosch appliances, and premium cabinetry with soft close doors. Enjoy spacious master suites, lavish bathrooms with Hansgrobe fixtures, designer accessories, hardwood flooring, and remote controlled window shades. Residents are invited to enjoy the convenient on-site amenities including the rooftop pool, fitness center, and work from home spaces. Enjoy premier shopping, chic eateries, and entertainment venues just steps from your door at The Grove. Schedule a tour today and experience luxury apartment living at VISION.','Apartment','0000-00-00 00:00:00','0000-00-00 00:00:00');
 
 
+select * from Unit;

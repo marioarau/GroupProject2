@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     var Unit = sequelize.define("Unit", {
-        landLordId: DataTypes.INTEGER,
+        //landLordId: DataTypes.INTEGER,
         rent: DataTypes.DECIMAL(10, 2),
         title: {
             type: DataTypes.STRING(100),
@@ -45,5 +45,17 @@ module.exports = function(sequelize, DataTypes) {
             values: ['Apartment', 'House', 'Condo', 'Townhouse']
         }
     });
+
+    Unit.associate = function(models) {
+        // We're saying that a Post should belong to an Author
+        // A Post can't be created without an Author due to the foreign key constraint
+        Unit.belongsTo(models.Landlord, {
+          foreignKey: {
+            allowNull: false
+          }
+        });
+      };
+    
+
     return Unit;
 };
