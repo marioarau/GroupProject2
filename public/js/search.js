@@ -35,10 +35,10 @@ $(document).ready(function() {
 
         console.log('getAll obj', obj);
 
-        // /api/fs/bedrooms/:bedrooms/city/:city/rentlow/:rent1/renthigh/:rent2
         var queryStr = obj.bedrooms + '/city/' + obj.city + '/rentlow/' + obj.rent1 + '/renthigh/' + obj.rent2;
         console.log(queryStr);
 
+        // /api/fs/bedrooms/:bedrooms/city/:city/rentlow/:rent1/renthigh/:rent2
         $.get('/api/fs/bedrooms/' + queryStr, function(data) {
 
             // if (err) {
@@ -101,10 +101,7 @@ $(document).ready(function() {
     }
 
     function clearSearchInputs() {
-        bedsInput.empty();
-        rentLow.empty();
-        rentMax.empty();
-        cityInput.val("");
+        $('#searchForm')[0].reset();
     }
 
     // function accepts an arguement & writes the results to search.html
@@ -176,6 +173,7 @@ $(document).ready(function() {
         messageH2.css({ "text-align": "center", "margin-top": "50px" });
         messageH2.html("No Matches Found");
         resultsDiv.append(messageH2);
+        clearSearchInputs();
     }
 
 
