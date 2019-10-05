@@ -34,5 +34,14 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
         }
     });
+
+    Landlord.associate = function(models) {
+        // Associating Author with Posts
+        // When an Author is deleted, also delete any associated Posts
+        Landlord.hasMany(models.Unit, {
+          onDelete: "cascade"
+        });
+      };
+    
     return Landlord;
 };

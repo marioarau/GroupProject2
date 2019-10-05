@@ -113,11 +113,14 @@ module.exports = function(app) {
     app.post("/api/units", function(req, res) {
 
         console.log('Add Unit Data:', req.body);
+        console.log('req.body.landlordId: :', req.body.landlordId);
+        var landlordId = parseInt(req.body.landlordId);
 
         // create() requires an object describing the new data we're adding to table
         db.Unit.create({
 
             // landLordId: req.body.id,
+            LandlordId: landlordId,
             title: req.body.title,
             rent: req.body.rent,
             bedrooms: req.body.bedrooms,

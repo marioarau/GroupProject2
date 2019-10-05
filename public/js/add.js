@@ -6,7 +6,9 @@ $(document).ready(function() {
         window.location.href = "/login.html";
     }
     // use jQuery references to capture values from form on add.html
+
     var addUnitForm = $("#unitForm");
+
     var titleInput = $("#title")
     var rentInput = $('#rent');
     var bedroomsInput = $("#bedrooms");
@@ -43,8 +45,12 @@ $(document).ready(function() {
             !stateInput.val().trim() || !zipInput.val().trim()) {
             return;
         }
+        landlordId = sessionStorage.getItem("landlordId");
+        console.log("landlordId: ",landlordId);
+
         // Constructing a newUnit object to pass to database
         var newUnit = {
+            landlordId: landlordId,
             title: titleInput.val().trim(),
             rent: rentInput.val().trim(),
             bedrooms: bedroomsInput.val(),
@@ -80,6 +86,7 @@ $(document).ready(function() {
             }
             // Show the modal
             console.log('New Unit Added!')
+
             $('#results-modal').modal("show");
             $('#unitForm')[0].reset();
         });
