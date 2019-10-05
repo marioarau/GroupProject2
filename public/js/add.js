@@ -1,8 +1,8 @@
 // loads js when html page is done loading
-$(document).ready(function () {
+$(document).ready(function() {
 
 
-    console.log("loggedIn: "+sessionStorage.getItem("loggedIn"));
+    console.log("loggedIn: " + sessionStorage.getItem("loggedIn"));
     // Returns null if it cannot find the item in sessionStorage. /
     if (!sessionStorage.getItem("loggedIn")) {
         window.location.href = "/login.html";
@@ -57,7 +57,7 @@ $(document).ready(function () {
         var newUnit = {
             title: titleInput.val().trim(),
             rent: rentInput.val().trim(),
-            bedrooms: bedroomsInput.val().trim(),
+            bedrooms: bedroomsInput.val(),
             baths: bathsInput.val().trim(),
             avgSqFt: avgSqFtInput.val().trim(),
             availability: availabilityInput.val().trim(),
@@ -89,15 +89,15 @@ $(document).ready(function () {
 
         // ajax post method call with 3 arguements
         // route to server, obj with new unit values & function declaration
-        $.post("/api/units/", Unit, function (err) {
+        $.post("/api/units/", Unit, function(err) {
 
             if (err) {
                 console.log("post err", err)
             }
-            // need to replace these 2 lines with a success modal when new unit succesfully added
+            // Show the modal 
             console.log('New Unit Added!')
-            alert('New Unit Added!');
-            window.location.href = "/add";
+            $('#results-modal').modal("show");
+            $('#unitForm')[0].reset();
         });
     }
 });
